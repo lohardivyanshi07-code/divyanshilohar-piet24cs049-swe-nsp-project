@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    /* ---------- Background and Global Styling ---------- */
+    body {
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      background-attachment: fixed;
+    }
+
+    h2 {
+      font-weight: 700;
+      color: #1d3557;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    p {
+      font-size: 1rem;
+    }
+
+    /* ---------- Navbar ---------- */
+    .navbar {
+      background: linear-gradient(90deg, #1d3557, #457b9d);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #f1faee !important;
+      letter-spacing: 1px;
+    }
+    .nav-link {
+      color: #f1faee !important;
+      margin: 0 5px;
+      transition: 0.3s;
+    }
+    .nav-link:hover {
+      color: #a8dadc !important;
+      text-decoration: underline;
+    }
+
+    /* ---------- About ---------- */
+    .about-div {
+      .about-image-gallery {
+        display :flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: -20px;
+      }
+      .about-image-gallery img{
+        flex: 1 1 calc(50% - 40px); 
+        margin: 20px;               
+        max-width: calc(50% - 40px);
+        box-sizing: border-box;     
+      }
+    }
+
+    /* ---------- Cards and Forms ---------- */
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+      border: none;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .form-control, .form-select, textarea {
+      border-radius: 10px;
+      box-shadow: none !important;
+    }
+
+    button.btn {
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+
+    button.btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- Tables ---------- */
+    table {
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th {
+      background-color: #1d3557 !important;
+      color: white !important;
+    }
+
+    /* ---------- Page Containers ---------- */
+    .container {
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 30px;
+      margin-top: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- Hidden Pages ---------- */
+    .hidden {
+      display: none;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- Star Rating ---------- */
+    .stars {
+      display: flex;
+      justify-content: start;
+      gap: 8px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .stars i.active {
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Event Manager</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('homePage')">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('about')">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('eventsPage')">View Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('registerPage')">Register</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('addEventPage')">Add Event</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('feedbackPage')">Feedback</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('adminPage')">Admin Panel</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Pages -->
+  <div class="container mt-4">
+
+    <!-- Home Page -->
+    <div id="homePage">
+      <h2>Welcome to Event Management System</h2>
+      <p class="lead">Plan, organize, and participate in amazing events — all from one place!</p>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZrKBMhDuNsfpGc_DKW2iCMOsYa32SouVV3g&s" alt="event image">
+    </div>
+
+    <!-- About -->
+    <div id="about" class="about-div hidden">
+      <p class="lead">About Event Management System</p>
+      <p>Welcome to our Event Management System! We specialize in organizing seamless and unforgettable events tailored to your unique needs.</p>
+      <div class="about-image-gallery">
+        <img src="https://www.thetamarindtree.in/wp-content/uploads/2024/09/SAL04106-1500x1000.jpg" height="250px" width="350px" alt="wedding">
+        <img src="https://vasudevevents.in/wp-content/uploads/2023/03/img-72-scaled.jpg" height="250px" width="350px" alt="birthday">
+        <img src="https://theroyalreception.com/assets/img/gallery/events/1.jpg" height="250px" width="350px" alt="corporate">
+        <img src="https://admin.hire4event.com/assets/ckeditor/uploads/Music%20concert%20organiser%20in%20Delhi,%20Noida,%20Gurgaon.jpg" height="250px" width="350px" alt="concert">
+      </div>
+    </div>
+
+    <!-- View Events -->
+    <div id="eventsPage" class="hidden">
+      <h2>Upcoming Events</h2>
+      <div class="row" id="eventsList"></div>
+    </div>
+
+    <!-- Register -->
+    <div id="registerPage" class="hidden">
+      <h2>Event Registration</h2>
+      <form id="registerForm" class="p-3 border rounded bg-white shadow-sm">
+        <div class="mb-3">
+          <label class="form-label fw-bold">Your Name</label>
+          <input type="text" class="form-control" id="regName" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Select Event</label>
+          <select id="regEvent" class="form-select" required></select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Register Now</button>
+      </form>
+    </div>
+
+    <!-- Add Event -->
+    <div id="addEventPage" class="hidden">
+      <h2>Add New Event</h2>
+      <form id="addEventForm" class="p-3 border rounded bg-white shadow-sm">
+        <div class="mb-3">
+          <label class="form-label fw-bold">Event Name</label>
+          <input type="text" class="form-control" id="eventName" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Date</label>
+          <input type="date" class="form-control" id="eventDate" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Description</label>
+          <textarea class="form-control" id="eventDesc" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Add Event</button>
+      </form>
+    </div>
+
+    <!-- Feedback -->
+    <div id="feedbackPage" class="hidden">
+      <h2>Feedback</h2>
+      <form id="feedbackForm" class="p-3 border rounded bg-white shadow-sm">
+        <div class="mb-3">
+          <label class="form-label fw-bold">Your Name</label>
+          <input type="text" id="fbName" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Your Feedback</label>
+          <textarea id="fbMessage" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Your Rating</label>
+          <div class="stars" id="starRating">
+            <i class="bi bi-star" data-value="1"></i>
+            <i class="bi bi-star" data-value="2"></i>
+            <i class="bi bi-star" data-value="3"></i>
+            <i class="bi bi-star" data-value="4"></i>
+            <i class="bi bi-star" data-value="5"></i>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-info w-100">Submit Feedback</button>
+      </form>
+    </div>
+
+    <!-- Admin -->
+    <div id="adminPage" class="hidden">
+      <h2>Admin Panel</h2>
+
+      <h4 class="mt-4">Manage Events</h4>
+      <table class="table table-bordered table-striped mt-2">
+        <thead>
+          <tr><th>#</th><th>Event Name</th><th>Date</th><th>Description</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="adminEventTable"></tbody>
+      </table>
+
+      <h4 class="mt-5">Registrations</h4>
+      <table class="table table-bordered table-striped mt-2">
+        <thead><tr><th>#</th><th>Name</th><th>Event</th></tr></thead>
+        <tbody id="registrationTable"></tbody>
+      </table>
+
+      <h4 class="mt-5">Feedbacks</h4>
+      <table class="table table-bordered table-striped mt-2">
+        <thead><tr><th>#</th><th>Name</th><th>Feedback</th><th>Rating</th></tr></thead>
+        <tbody id="feedbackTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Event Manager | Designed by Divyanshi Lohar</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    let selectedRating = 0;
+
+    // ---------- Star Rating ----------
+    const stars = document.querySelectorAll('#starRating i');
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = star.getAttribute('data-value');
+        stars.forEach(s => s.classList.remove('active', 'bi-star-fill'));
+        for (let i = 0; i < selectedRating; i++) {
+          stars[i].classList.add('active', 'bi-star-fill');
+        }
+      });
+    });
+
+    // ---------- Helper Functions ----------
+    function showPage(pageId) {
+      document.querySelectorAll('.container > div').forEach(div => div.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+      if (pageId === 'eventsPage') displayEvents();
+      if (pageId === 'registerPage') loadEventOptions();
+      if (pageId === 'adminPage') loadAdminData();
+    }
+
+    function getEvents() {
+      return JSON.parse(localStorage.getItem('events') || '[]');
+    }
+    function saveEvents(events) {
+      localStorage.setItem('events', JSON.stringify(events));
+    }
+
+    // ---------- Display Events ----------
+    function displayEvents() {
+      const events = getEvents();
+      const container = document.getElementById('eventsList');
+      container.innerHTML = '';
+      if (events.length === 0) {
+        container.innerHTML = '<p>No events available. Add one!</p>';
+        return;
+      }
+      events.forEach(event => {
+        container.innerHTML += `
+          <div class="col-md-4 mb-3">
+            <div class="card p-3">
+              <h5 class="text-primary">${event.name}</h5>
+              <p><b>Date:</b> ${event.date}</p>
+              <p>${event.desc}</p>
+            </div>
+          </div>`;
+      });
+    }
+
+    // ---------- Add Event ----------
+    document.getElementById('addEventForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('eventName').value;
+      const date = document.getElementById('eventDate').value;
+      const desc = document.getElementById('eventDesc').value;
+      const events = getEvents();
+      events.push({ name, date, desc });
+      saveEvents(events);
+      alert('🎊 Event added successfully!');
+      e.target.reset();
+      showPage('eventsPage');
+    });
+
+    // ---------- Register ----------
+    function loadEventOptions() {
+      const events = getEvents();
+      const select = document.getElementById('regEvent');
+      select.innerHTML = '';
+      if (events.length === 0) {
+        select.innerHTML = '<option>No events available</option>';
+        return;
+      }
+      events.forEach(event => {
+        const opt = document.createElement('option');
+        opt.value = event.name;
+        opt.textContent = event.name;
+        select.appendChild(opt);
+      });
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('regName').value;
+      const eventName = document.getElementById('regEvent').value;
+      const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+      registrations.push({ name, eventName });
+      localStorage.setItem('registrations', JSON.stringify(registrations));
+      alert(`✅ ${name} registered for ${eventName}!`);
+      e.target.reset();
+    });
+
+    // ---------- Feedback ----------
+    document.getElementById('feedbackForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('fbName').value;
+      const message = document.getElementById('fbMessage').value;
+      if (selectedRating === 0) {
+        alert('⭐ Please select a rating before submitting.');
+        return;
+      }
+      const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+      feedbacks.push({ name, message, rating: selectedRating });
+      localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+      alert('💬 Thank you for your feedback!');
+      e.target.reset();
+      stars.forEach(s => s.classList.remove('active', 'bi-star-fill'));
+      selectedRating = 0;
+      showPage('homePage');
+    });
+
+    // ---------- Admin ----------
+    function loadAdminData() {
+      const events = getEvents();
+      const registrations = JSON.parse(localStorage.getItem('registrations') || '[]');
+      const feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+
+      const eventTable = document.getElementById('adminEventTable');
+      eventTable.innerHTML = '';
+      events.forEach((event, i) => {
+        eventTable.innerHTML += `<tr>
+          <td>${i + 1}</td><td>${event.name}</td><td>${event.date}</td><td>${event.desc}</td>
+          <td><button class="btn btn-sm btn-warning" onclick="editEvent(${i})">Edit</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteEvent(${i})">Delete</button></td></tr>`;
+      });
+
+      const regTable = document.getElementById('registrationTable');
+      regTable.innerHTML = '';
+      registrations.forEach((r, i) => {
+        regTable.innerHTML += `<tr><td>${i + 1}</td><td>${r.name}</td><td>${r.eventName}</td></tr>`;
+      });
+
+      const fbTable = document.getElementById('feedbackTable');
+      fbTable.innerHTML = '';
+      feedbacks.forEach((f, i) => {
+        fbTable.innerHTML += `<tr><td>${i + 1}</td><td>${f.name}</td><td>${f.message}</td><td>${'⭐'.repeat(f.rating)}</td></tr>`;
+      });
+    }
+
+    function editEvent(i) {
+      const events = getEvents();
+      const event = events[i];
+      const n = prompt('Edit name:', event.name);
+      const d = prompt('Edit date:', event.date);
+      const ds = prompt('Edit description:', event.desc);
+      if (n && d && ds) {
+        events[i] = { name: n, date: d, desc: ds };
+        saveEvents(events);
+        loadAdminData();
+      }
+    }
+
+        function deleteEvent(i) {
+      const events = getEvents();
+      if (confirm("⚠️ Are you sure you want to delete this event?")) {
+        events.splice(i, 1);
+        saveEvents(events);
+        alert("🗑️ Event deleted!");
+        loadAdminData();
+      }
+    }
+
+    // ---------- Initialize ----------
+    showPage('homePage');
+  </script>
+</body>
+</html>
+
+     
